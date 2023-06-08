@@ -1,0 +1,47 @@
+version: '3.1'
+
+services:
+  bangkok:
+    image: mohammed2asif/bangkok:latest
+    deploy:
+      replicas: 2
+    networks:
+      - swarm101
+
+  munich:
+    image: mohammed2asif/munich:latest
+    deploy:
+      replicas: 2
+    networks:
+      - swarm101
+
+  tokyo:
+    image: mohammed2asif/tokyo:latest
+    deploy:
+      replicas: 1
+    networks:
+      - swarm101
+
+  nyc:
+    image: mohammed2asif/nyc:latest
+    deploy:
+      replicas: 1
+    networks:
+      - swarm101
+
+  front_gateway:
+    image: mohammed2asif/front_gateway:latest
+    deploy:
+      replicas: 1
+    ports:
+      - 8000:8000
+    networks:
+      - swarm101
+
+networks:
+  swarm101:
+    driver: overlay
+    ipam:
+      config:
+        -
+          subnet: 192.168.0.0/24

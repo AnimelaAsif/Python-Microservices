@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nyc
+  labels:
+    name: nyc
+spec:
+  selector:
+    name: nyc
+  ports:
+   - port: 9292
+     targetPort: 9292
+---
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  name: nyc
+  labels:
+    name: nyc
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: nyc
+    spec:
+      containers:
+        - name: nyc
+          image: zkan/nyc:latest
